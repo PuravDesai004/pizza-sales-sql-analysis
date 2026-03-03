@@ -98,4 +98,4 @@ This is a beginner-level data analytics project built to practice SQL skills inc
 
 **Tool used:** MySQL  
 **Author:** Purav Desai 
-**LinkedIn:** 
+**LinkedIn:**  https://www.linkedin.com/in/purav-desai41?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
