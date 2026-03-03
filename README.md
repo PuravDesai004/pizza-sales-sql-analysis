@@ -97,5 +97,5 @@ The dataset contains records of pizza orders including order date, pizza name, s
 This is a beginner-level data analytics project built to practice SQL skills including data cleaning, aggregation, time-series analysis, and window functions.
 
 **Tool used:** MySQL  
-**Author:** [Your Name]  
-**LinkedIn:** [Your LinkedIn URL]
+**Author:** Purav Desai 
+**LinkedIn:** 
