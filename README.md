@@ -3,7 +3,7 @@
 A beginner SQL project analyzing pizza sales data to uncover business insights such as top-selling items, revenue trends, and customer order patterns.
 
 ---
-
+![Dashboard Preview](pizza_analysis.pdf)
 ## 📁 Files in This Repository
 
 | File | Description |
