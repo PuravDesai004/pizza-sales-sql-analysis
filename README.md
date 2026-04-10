@@ -1,7 +1,7 @@
 # Pizza Sales Analysis — SQL Project
 
-SQL analysis of pizza sales data covering revenue trends, best-selling items,
-category performance, and time-based patterns.
+SQL analysis of pizza sales data covering revenue trends, best selling items,
+category performance, and time based patterns.
 
 ---
 
@@ -13,7 +13,7 @@ category performance, and time-based patterns.
 
 ## Dataset
 
-Single table `pizza_sales` with order-level records including pizza name, size,
+Single table `pizza_sales` with order level records including pizza name, size,
 category, quantity, and pricing.
 
 | Column | Description |
@@ -46,7 +46,7 @@ simplification could improve margins without impacting revenue significantly.
 
 ### 2. Size drives revenue more than quantity
 Large pizzas generate more revenue per order despite not always being the
-most ordered size. This points to an upselling opportunity — nudging customers
+most ordered size. This points to an upselling opportunity nudging customers
 toward larger sizes at checkout could meaningfully increase average order value.
 
 ### 3. Revenue is concentrated in specific months and days
