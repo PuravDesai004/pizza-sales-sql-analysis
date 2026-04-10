@@ -1,101 +1,115 @@
-# 🍕 Pizza Sales Data Analysis — SQL Project
+# Pizza Sales Analysis — SQL Project
 
-A beginner SQL project analyzing pizza sales data to uncover business insights such as top-selling items, revenue trends, and customer order patterns.
-
----
-![Dashboard Preview](pizza_analysis.pdf)
-## 📁 Files in This Repository
-
-| File | Description |
-|------|-------------|
-| `pizza_sales_analysis.sql` | All SQL queries used in this project |
-| `README.md` | Project overview and documentation |
+SQL analysis of pizza sales data covering revenue trends, best-selling items,
+category performance, and time-based patterns.
 
 ---
 
-## 🗄️ Dataset
+## Dashboard
 
-**Table name:** `pizza_sales`
+![Pizza Dashboard](dashboard_screenshot.jpg)
 
-The dataset contains records of pizza orders including order date, pizza name, size, category, quantity, and price information.
+---
+
+## Dataset
+
+Single table `pizza_sales` with order-level records including pizza name, size,
+category, quantity, and pricing.
 
 | Column | Description |
-|--------|-------------|
-| `order_id` | Unique ID for each order |
-| `order_date` | Date the order was placed |
-| `pizza_name` | Name of the pizza |
-| `pizza_id` | Unique pizza identifier |
-| `pizza_category` | Category (e.g., Classic, Veggie) |
-| `pizza_size` | Size (S, M, L, XL) |
-| `quantity` | Number of pizzas ordered |
-| `unit_price` | Price per pizza |
-| `total_price` | Total price for that line item |
+|---|---|
+| order_id | Unique ID for each order |
+| order_date | Date the order was placed |
+| pizza_name | Name of the pizza |
+| pizza_category | Category (Classic, Veggie, etc.) |
+| pizza_size | Size (S, M, L, XL) |
+| quantity | Number of pizzas ordered |
+| unit_price | Price per pizza |
+| total_price | Total price for that line item |
 
 ---
 
-## 🔍 What This Project Covers
+## Tools
 
-### ✅ Step 1 — Data Cleaning
-- Converted the `order_date` column from a text format (`DD-MM-YYYY`) to a proper SQL `DATE` type using `STR_TO_DATE()`
-
-### ✅ Step 2 — Data Exploration
-- Viewed the full dataset
-- Found the most expensive and cheapest pizzas
-- Identified expensive pizzas that are still below the average price
-
-### ✅ Step 3 — Business KPIs
-- Top 5 best-selling pizzas by quantity
-- Top 5 revenue-generating pizzas
-- Revenue and quantity breakdown by pizza size
-- Average order value
-- Revenue by pizza category
-
-### ✅ Step 4 — Time-Based Analysis
-- Identified the highest revenue month
-- Identified the highest revenue single day
-
-### ✅ Step 5 — Advanced Analysis
-- Top 3 best-selling pizzas within each category (using `RANK()` window function)
-- Pizzas priced above their category's average (using `AVG() OVER PARTITION BY`)
+| Tool | Purpose |
+|---|---|
+| MySQL Workbench | Data cleaning and SQL analysis |
 
 ---
 
-## 🛠️ SQL Concepts Used
+## Key Findings
 
-- `ALTER TABLE`, `UPDATE`, `STR_TO_DATE()` — data cleaning
+### 1. A small number of pizzas drive most revenue
+The top 5 pizzas by revenue account for a disproportionate share of total sales.
+Classic and premium categories consistently outperform others, suggesting menu
+simplification could improve margins without impacting revenue significantly.
+
+### 2. Size drives revenue more than quantity
+Large pizzas generate more revenue per order despite not always being the
+most ordered size. This points to an upselling opportunity — nudging customers
+toward larger sizes at checkout could meaningfully increase average order value.
+
+### 3. Revenue is concentrated in specific months and days
+Analysis of order dates reveals clear peaks in monthly and daily revenue.
+The highest revenue day and month are identifiable with simple time-based
+queries, giving the business a basis for targeted promotions.
+
+---
+
+## SQL Concepts Used
+
+- `ALTER TABLE`, `UPDATE`, `STR_TO_DATE()` — data type conversion
 - `GROUP BY`, `ORDER BY`, `LIMIT` — aggregation and sorting
 - `SUM()`, `AVG()`, `COUNT()`, `ROUND()` — aggregate functions
 - `WHERE` with subqueries — filtered lookups
-- `WITH` (CTEs) — Common Table Expressions for readable queries
-- `RANK() OVER (PARTITION BY ...)` — window functions for ranking within groups
-- `AVG() OVER (PARTITION BY ...)` — window functions for category-level averages
-- `DATE_FORMAT()` — formatting dates for time-based grouping
+- `WITH` (CTEs) — breaking complex queries into readable steps
+- `RANK() OVER (PARTITION BY ...)` — ranking within category groups
+- `AVG() OVER (PARTITION BY ...)` — category-level average comparisons
+- `DATE_FORMAT()` — time-based grouping
 
 ---
 
-## 💡 Key Insights
+## Sample Query
 
-- **Best-selling pizza:** Found by summing quantity across all orders grouped by pizza name
-- **Highest revenue month:** Identified using a CTE with monthly grouping
-- **Category leaders:** Used window functions to rank pizzas within each category independently
-- **Above-average pricing:** Used partitioned window functions to compare each pizza's price to its category average
+```sql
+-- top 3 best-selling pizzas per category using rank()
+WITH ranked AS (
+    SELECT pizza_category, pizza_name,
+        SUM(quantity) AS total_qty,
+        RANK() OVER (PARTITION BY pizza_category ORDER BY SUM(quantity) DESC) AS rnk
+    FROM pizza_sales
+    GROUP BY pizza_category, pizza_name
+)
+SELECT * FROM ranked WHERE rnk <= 3
+ORDER BY pizza_category, rnk;
+```
+
+Full query file: [pizza_sales_analysis.sql](pizza_sales_analysis.sql)
 
 ---
 
-## 🚀 How to Run
+## Files
 
-1. Import the `pizza_sales` dataset into your MySQL database
-2. Open `pizza_sales_analysis.sql` in MySQL Workbench (or any SQL client)
-3. Run the queries step by step — each section is clearly labeled
-
-> ⚠️ Run **Step 1 (Data Cleaning)** first before any other queries, since it converts the date column format that the rest of the queries depend on.
+```
+├── pizza_sales_analysis.sql    
+└── README.md
+```
 
 ---
 
-## 👤 About
+## How to Run
 
-This is a beginner-level data analytics project built to practice SQL skills including data cleaning, aggregation, time-series analysis, and window functions.
+1. Import the pizza_sales dataset into your MySQL database
+2. Open `pizza_sales_analysis.sql` in MySQL Workbench
+3. Run Step 1 (data cleaning) first — it converts the date column format
+4. Run remaining queries in order
 
-**Tool used:** MySQL  
-**Author:** Purav Desai 
-**LinkedIn:**  https://www.linkedin.com/in/purav-desai41?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
+---
+
+## Author
+
+Purav Desai
+B.Tech IT — Semester 6 | SCET, Surat
+
+GitHub: [PuravDesai004](https://github.com/PuravDesai004)
+LinkedIn: https://www.linkedin.com/in/puravdesai41
