@@ -7,7 +7,7 @@ category performance, and time-based patterns.
 
 ## Dashboard
 
-![Pizza Dashboard](dashboard_screenshot.jpg)
+![Pizza Dashboard](dashboard_screenshot.png)
 
 ---
 
