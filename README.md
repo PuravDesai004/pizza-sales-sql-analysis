@@ -13,8 +13,11 @@ category performance, and time based patterns.
 
 ## Dataset
 
-Single table `pizza_sales` with order level records including pizza name, size,
-category, quantity, and pricing.
+Single table `pizza_sales` with order line records including pizza name, size,
+category, quantity, and pricing. The included CSV has 48,620 rows. Its exact
+source and redistribution terms are not documented in this repository.
+
+Count the rows from this folder with `python -c "import csv; print(sum(1 for _ in csv.DictReader(open('pizza_sales.csv', encoding='utf-8-sig', newline=''))))"`.
 
 | Column | Description |
 |---|---|
@@ -41,8 +44,8 @@ category, quantity, and pricing.
 
 ### 1. A small number of pizzas drive most revenue
 The top 5 pizzas by revenue account for a disproportionate share of total sales.
-Classic and premium categories consistently outperform others, suggesting menu
-simplification could improve margins without impacting revenue significantly.
+The data describes sales, but it does not include the costs needed to establish
+profit margins or the effect of changing the menu.
 
 ### 2. Size drives revenue more than quantity
 Large pizzas generate more revenue per order despite not always being the
